@@ -1,0 +1,41 @@
+1 - Player gets dealt 2 cards to start ***
+
+2 - Sum score of 2 cards & output ***
+
+3 - If sum == 21 --> stop game, player wins ***
+
+4 - If sum < 21 --> player chooses to hit or stay ***
+
+5 - Until player says 'STAY', dealer deals another card to player ***
+
+6 - After each deal, sum player's score and output ***
+
+7 - If sum > 21, stop game, player loses ***
+
+8 - If sum == 21, stop game, player wins ***
+
+5 - After each deal, sum player's score and output ***
+
+6 - Player is prompted w/ HIT? or STAY? ***
+
+7 - When player chooses STAY, compute player's final score
+
+8 - Save player's score to variable
+
+9 - Computer gets dealt 2 cards to start
+
+10 - Sum score of 2 cards
+
+11 - If sum > 21 --> break, computer loses
+
+12 - If sum < 17 --> deal again and compute new score
+
+13 - If 17 < sum < 21 --> stop and save that score
+
+14 - Compare player score and dealer score
+
+15 - If player score > dealer score => player wins
+
+16 - Elsif player score < dealer score => dealer wins
+
+17 - Draw/Tie
