@@ -12,8 +12,20 @@ class Game
     hand
   end
 
+  def print_hit
+    "#{hit.rank} #{hit.suit}"
+  end
+
   def hit
-    hit_card = @deck.draw!
+    @deck.draw!
+  end
+
+  def print_hand
+    str = ""
+    @player_hand.current_hand.each do |card|
+      str << "#{card.rank} #{card.suit} \n"
+    end
+    str
   end
 
   def print_dealer_hand
@@ -24,13 +36,7 @@ class Game
     str
   end
 
-  def print_hand
-    str = ""
-    @player_hand.current_hand.each do |card|
-      str << "#{card.rank} #{card.suit} \n"
-    end
-    str
-  end
+  # -- PLAYER'S TURN -- #
 
   def hit_or_stay_prompt
     player_choice = ''
@@ -47,41 +53,14 @@ class Game
     if player_choice == 'h'
       @player_hand.current_hand << hit
       check_player_result
-      # puts print_hit
-    else player_choice == 's'
+    elsif player_choice == 's'
       puts "Player Score: #{player_score}"
       computer_play
     end
   end
 
-  def computer_play
-
-    until @dealer_hand.score >= 17 do
-      @dealer_hand.current_hand << hit
-    end
-
-    puts print_computer_initial_draw
-    puts "Dealer Stands."
-
-    check_computer_result
-
-  end
-
-
-  def check_computer_result
-    if dealer_score > 21
-      puts "Dealer Score: #{dealer_score}"
-      puts "Dealer busts!"
-    elsif dealer_score > player_score
-      puts "Dealer wins!"
-    elsif dealer_score < player_score
-      puts "You win!"
-    end
-  end
-
-
   def player_experience_over?
-    player_score >= 21
+    player_score > 21 || player_score == 21
   end
 
   def check_player_result
@@ -89,7 +68,7 @@ class Game
       if player_score > 21
         puts print_hit
         puts "Player Score: #{player_score}"
-        'You lost!'
+        puts "Bust! Game over..."
       else
         puts print_hit
         puts "Player Score: #{player_score}"
@@ -102,6 +81,34 @@ class Game
     end
   end
 
+  # -- DEALER'S TURN -- #
+
+  def computer_play
+
+    until @dealer_hand.score >= 17 do
+      @dealer_hand.current_hand << hit
+    end
+
+    puts print_computer_initial_draw
+    puts "Dealer score: #{dealer_score}"
+    puts "Dealer Stands."
+
+    check_computer_result
+
+  end
+
+
+  def check_computer_result
+    if dealer_score > 21
+      puts "Dealer busts!"
+    elsif dealer_score > player_score
+      puts "Dealer wins!"
+    elsif dealer_score < player_score
+      puts "You win!"
+    elsif dealer_score == player_score
+      puts "Draw!"
+    end
+  end
 
 #scores
 
@@ -122,9 +129,6 @@ Player score: #{player_score}
 )
   end
 
-  def print_hit
-    "#{hit.rank} #{hit.suit}"
-  end
 
   def print_player_move
     next_move?

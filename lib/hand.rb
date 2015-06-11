@@ -13,7 +13,7 @@ class Hand
         sum += 10
       elsif card.rank == 'A'
         ace_count += 1
-          if sum + (ace_count + 10) <= 21
+          if (sum + (ace_count + 10)) <= 21
             sum += (ace_count + 10)
           else
             sum += ace_count
